@@ -52,6 +52,39 @@ subprojects {
 
 project(':campaign-api') {
 
+    bootRun {
+        group = 'LOCAL'
+        systemProperties = ['spring.profiles.active': "local"]
+    }
+
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-actuator')
+        compile('org.springframework.boot:spring-boot-actuator-docs')
+        compile('org.springframework.boot:spring-boot-starter-web')
+    }
+
+}
+
+project(':campaign-core') {
+
+    bootRepackage {
+        enabled = false
+    }
+
+    dependencies {
+    }
+
+}
+
+project(':campaign-persistence') {
+
+    bootRepackage {
+        enabled = false
+    }
+
+    dependencies {
+    }
+
 }
 
 
