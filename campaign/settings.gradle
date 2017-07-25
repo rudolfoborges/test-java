@@ -1,0 +1,6 @@
+rootProject.name = 'campaign'
+
+include 'campaign-api',
+        'campaign-core',
+        'campaign-persistence',
+        'campaign-messaging'
