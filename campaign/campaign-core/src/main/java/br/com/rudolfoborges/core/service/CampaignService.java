@@ -2,6 +2,7 @@ package br.com.rudolfoborges.core.service;
 
 import br.com.rudolfoborges.core.Campaign;
 import br.com.rudolfoborges.core.context.CreateCampaignContext;
+import br.com.rudolfoborges.core.context.UpdateCampaignContext;
 
 /**
  * @author rudolfoborges
@@ -9,6 +10,8 @@ import br.com.rudolfoborges.core.context.CreateCampaignContext;
  */
 public interface CampaignService {
 
-	Campaign create(CreateCampaignContext createCampaignContext);
+    Campaign create(CreateCampaignContext context);
+
+    void updateAndNotify(UpdateCampaignContext context);
 
 }

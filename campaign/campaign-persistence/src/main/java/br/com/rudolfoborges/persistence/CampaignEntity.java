@@ -1,14 +1,9 @@
 package br.com.rudolfoborges.persistence;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author rudolfoborges
@@ -18,86 +13,97 @@ import javax.validation.constraints.NotNull;
 @Table(name = "campaigns")
 public class CampaignEntity {
 
-	@Id
-	@GeneratedValue
-	private long id;
+    @Id
+    @GeneratedValue
+    private long id;
 
-	@NotNull
-	private String name;
+    @NotNull
+    private String name;
 
-	@NotNull
-	private long favouriteTeam;
+    @NotNull
+    private long favouriteTeam;
 
-	@NotNull
-	private LocalDate startedAt;
+    @NotNull
+    private LocalDate startedAt;
 
-	@NotNull
-	private LocalDate closedAt;
+    @NotNull
+    private LocalDate closedAt;
 
-	@NotNull
-	private LocalDateTime createdAt;
+    @NotNull
+    private LocalDateTime createdAt;
 
-	public CampaignEntity() {
-	}
+    @NotNull
+    private Boolean active;
 
-	public CampaignEntity(String name, long favouriteTeam, LocalDate startedAt, LocalDate closedAt) {
-		this.name = name;
-		this.favouriteTeam = favouriteTeam;
-		this.startedAt = startedAt;
-		this.closedAt = closedAt;
-	}
+    public CampaignEntity() {
+    }
 
-	@PrePersist
-	public void onCreatedAt() {
-		createdAt = LocalDateTime.now();
-	}
+    public CampaignEntity(String name, long favouriteTeam, LocalDate startedAt, LocalDate closedAt) {
+        this.name = name;
+        this.favouriteTeam = favouriteTeam;
+        this.startedAt = startedAt;
+        this.closedAt = closedAt;
+    }
 
-	public long getId() {
-		return id;
-	}
+    @PrePersist
+    public void onCreate() {
+        createdAt = LocalDateTime.now();
+        setActive(true);
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public long getFavouriteTeam() {
-		return favouriteTeam;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setFavouriteTeam(long favouriteTeam) {
-		this.favouriteTeam = favouriteTeam;
-	}
+    public long getFavouriteTeam() {
+        return favouriteTeam;
+    }
 
-	public LocalDate getStartedAt() {
-		return startedAt;
-	}
+    public void setFavouriteTeam(long favouriteTeam) {
+        this.favouriteTeam = favouriteTeam;
+    }
 
-	public void setStartedAt(LocalDate startedAt) {
-		this.startedAt = startedAt;
-	}
+    public LocalDate getStartedAt() {
+        return startedAt;
+    }
 
-	public LocalDate getClosedAt() {
-		return closedAt;
-	}
+    public void setStartedAt(LocalDate startedAt) {
+        this.startedAt = startedAt;
+    }
 
-	public void setClosedAt(LocalDate closedAt) {
-		this.closedAt = closedAt;
-	}
+    public LocalDate getClosedAt() {
+        return closedAt;
+    }
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
+    public void setClosedAt(LocalDate closedAt) {
+        this.closedAt = closedAt;
+    }
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 }
