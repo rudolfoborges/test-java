@@ -9,9 +9,9 @@ import br.com.rudolfoborges.persistence.CampaignEntityBuilder;
 import br.com.rudolfoborges.persistence.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 
 /**
@@ -47,9 +47,10 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
     @Override
-    public void updateAndNotify(UpdateCampaignContext context) {
+    @Transactional
+    public void updateAndNotify(long id, UpdateCampaignContext context) {
 
-        final CampaignEntity campaignEntity = campaignRepository.findOne(context.getId())
+        final CampaignEntity campaignEntity = campaignRepository.findOne(id)
                 .orElseThrow(RuntimeException::new);
 
         if (context.getName() != null) {
@@ -59,6 +60,8 @@ public class CampaignServiceImpl implements CampaignService {
         if (context.getActive() != null) {
             campaignEntity.setActive(context.getActive());
         }
+
+        campaignRepository.save(campaignEntity);
     }
 
 

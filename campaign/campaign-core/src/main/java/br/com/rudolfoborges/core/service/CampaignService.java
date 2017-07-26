@@ -12,6 +12,6 @@ public interface CampaignService {
 
     Campaign create(CreateCampaignContext context);
 
-    void updateAndNotify(UpdateCampaignContext context);
+    void updateAndNotify(long id, UpdateCampaignContext context);
 
 }

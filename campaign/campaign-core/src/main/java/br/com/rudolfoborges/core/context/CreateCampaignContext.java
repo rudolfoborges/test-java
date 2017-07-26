@@ -1,44 +1,43 @@
 package br.com.rudolfoborges.core.context;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by rudolfoborges on 25/07/17.
  */
 public class CreateCampaignContext {
 
-	private final String name;
+    private String name;
 
-	private final long favouriteTeam;
+    private long favouriteTeam;
 
-	private final LocalDate startedAt;
+    private LocalDate startedAt;
 
-	private final int days;
+    private int days;
 
-	public CreateCampaignContext(String name, long favouriteTeam, LocalDate startedAt, int days) {
-		this.name = name;
-		this.favouriteTeam = favouriteTeam;
-		this.startedAt = startedAt;
-		this.days = days;
-	}
+    public CreateCampaignContext() {
+    }
 
-	public String getName() {
-		return name;
-	}
+    public CreateCampaignContext(String name, long favouriteTeam, LocalDate startedAt, int days) {
+        this.name = name;
+        this.favouriteTeam = favouriteTeam;
+        this.startedAt = startedAt;
+        this.days = days;
+    }
 
-	public long getFavouriteTeam() {
-		return favouriteTeam;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public LocalDate getStartedAt() {
-		return startedAt;
-	}
+    public long getFavouriteTeam() {
+        return favouriteTeam;
+    }
 
-	public int getDays() {
-		return days;
-	}
+    public LocalDate getStartedAt() {
+        return startedAt;
+    }
+
+    public int getDays() {
+        return days;
+    }
 }

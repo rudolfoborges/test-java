@@ -3,7 +3,7 @@ package br.com.rudolfoborges.api;
 
 import br.com.rudolfoborges.core.Campaign;
 import br.com.rudolfoborges.core.context.CreateCampaignContext;
-import br.com.rudolfoborges.core.context.CreateCampaignContextBuilder;
+import br.com.rudolfoborges.core.context.UpdateCampaignContext;
 import br.com.rudolfoborges.core.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -34,17 +34,9 @@ public class CampaignController {
     }
 
     @PostMapping
-    public ResponseEntity<Campaign> post(@RequestBody @Valid CampaignRequestBody campaignRequestBody) {
+    public ResponseEntity<Campaign> post(@RequestBody @Valid CreateCampaignContext context) {
 
-        final CreateCampaignContext createCampaignContext = CreateCampaignContextBuilder
-                .newBuilder()
-                .name(campaignRequestBody.getName())
-                .favouriteTeam(campaignRequestBody.getFavouriteTeam())
-                .startedAt(campaignRequestBody.getStartedAt())
-                .days(campaignRequestBody.getDays())
-                .build();
-
-        final Campaign campaign = campaignService.create(createCampaignContext);
+        final Campaign campaign = campaignService.create(context);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -52,8 +44,12 @@ public class CampaignController {
     }
 
     @PutMapping("{id}")
-    public void put() {
+    public ResponseEntity<Void> put(@PathVariable("id") long id,
+                                    @RequestBody UpdateCampaignContext context) {
 
+        campaignService.updateAndNotify(id, context);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("{id}")
