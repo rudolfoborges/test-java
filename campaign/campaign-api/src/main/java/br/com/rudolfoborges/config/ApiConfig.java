@@ -12,7 +12,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Created by rudolfoborges on 26/07/17.
  */
 @Configuration
-@EnableSwagger2
 @ComponentScan({"br.com.rudolfoborges"})
 @Import({CoreConfig.class})
 @PropertySource(ignoreResourceNotFound = false, value = "classpath:api-application.properties")

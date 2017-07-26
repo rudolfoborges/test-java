@@ -96,4 +96,16 @@ project(':campaign-persistence') {
 
 }
 
+project(':campaign-messaging') {
+
+    bootRepackage {
+        enabled = false
+    }
+
+    dependencies {
+
+    }
+
+}
+
 
