@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,8 @@ import java.util.Optional;
  * @since 7/25/17 9:01 PM
  */
 @Repository
-public interface CampaignRepository extends JpaRepository<CampaignEntity, Long> {
+public interface CampaignRepository extends JpaRepository<CampaignEntity, Long>,
+        PagingAndSortingRepository<CampaignEntity, Long> {
 
     Optional<CampaignEntity> findOne(long id);
 
@@ -23,6 +25,5 @@ public interface CampaignRepository extends JpaRepository<CampaignEntity, Long> 
 
     @Query("select count(e) > 0 from CampaignEntity e where e.id = :id")
     boolean exists(@Param("id") long id);
-
 
 }

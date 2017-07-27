@@ -8,13 +8,13 @@ import br.com.rudolfoborges.persistence.CampaignEntity;
  */
 public class CampaignEntityToCampaignConverter {
 
-	public static Campaign convertFrom(CampaignEntity campaignEntity){
-		return new Campaign(campaignEntity.getId(),
-				campaignEntity.getName(),
-				campaignEntity.getFavouriteTeam(),
-				campaignEntity.getStartedAt(),
-				campaignEntity.getClosedAt(),
-				campaignEntity.getCreatedAt());
-	}
+    public static Campaign convertFrom(CampaignEntity campaignEntity) {
+        return new Campaign(campaignEntity.getId(),
+                campaignEntity.getName(),
+                campaignEntity.getFavouriteTeam(),
+                campaignEntity.getStartedAt(),
+                campaignEntity.getClosedAt(),
+                campaignEntity.getCreatedAt());
+    }
 
 }

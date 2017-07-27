@@ -8,11 +8,16 @@ import br.com.rudolfoborges.persistence.CampaignEntity;
 import br.com.rudolfoborges.persistence.CampaignEntityBuilder;
 import br.com.rudolfoborges.persistence.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author rudolfoborges
@@ -63,6 +68,38 @@ public class CampaignServiceImpl implements CampaignService {
 
         campaignRepository.save(campaignEntity);
     }
+
+    @Override
+    public Page<Campaign> find(Long favouritoTeam, Pageable pageable) {
+
+        Page<CampaignEntity> page;
+
+        if (favouritoTeam != null) {
+            page = campaignRepository.findByFavouriteTeam(favouritoTeam, pageable);
+        } else {
+            page = campaignRepository.findAll(pageable);
+        }
+
+        final List<Campaign> content = page
+                .getContent()
+                .stream()
+                .map(campaignEntity -> CampaignEntityToCampaignConverter.convertFrom(campaignEntity))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(content,
+                pageable,
+                page.getTotalElements());
+    }
+
+    @Override
+    public Campaign findOne(long id) {
+        final CampaignEntity campaignEntity = campaignRepository.findOne(id)
+                .orElseThrow(RuntimeException::new);
+
+        return CampaignEntityToCampaignConverter.convertFrom(campaignEntity);
+    }
+
+    public void delete()
 
 
 }

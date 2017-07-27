@@ -4,6 +4,7 @@ import br.com.rudolfoborges.core.Campaign;
 import br.com.rudolfoborges.core.context.CreateCampaignContext;
 import br.com.rudolfoborges.core.context.UpdateCampaignContext;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * @author rudolfoborges
@@ -15,7 +16,7 @@ public interface CampaignService {
 
     void updateAndNotify(long id, UpdateCampaignContext context);
 
-    Page<Campaign> find(Long favouritoTeam);
+    Page<Campaign> find(Long favouritoTeam, Pageable pageable);
 
     Campaign findOne(long id);
 
