@@ -20,4 +20,6 @@ public interface CampaignService {
 
     Campaign findOne(long id);
 
+    void delete(long id);
+
 }

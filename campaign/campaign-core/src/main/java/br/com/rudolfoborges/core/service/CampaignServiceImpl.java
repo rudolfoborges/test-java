@@ -99,7 +99,12 @@ public class CampaignServiceImpl implements CampaignService {
         return CampaignEntityToCampaignConverter.convertFrom(campaignEntity);
     }
 
-    public void delete()
+    public void delete(long id) {
+        final CampaignEntity campaignEntity = campaignRepository.findOne(id)
+                .orElseThrow(RuntimeException::new);
+
+        campaignRepository.delete(campaignEntity);
+    }
 
 
 }
