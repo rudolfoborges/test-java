@@ -29,7 +29,13 @@ public class CampaignController {
     private CampaignService campaignService;
 
     @GetMapping
-    public void get(Pageable pageable) {
+    public void get(@RequestParam(value = "favouritoTeam", required = false) Long favouritoTeam,
+                    Pageable pageable) {
+
+    }
+
+    @GetMapping("{id}")
+    public void getOne(@PathVariable("id") long id) {
 
     }
 
@@ -48,13 +54,11 @@ public class CampaignController {
                                     @RequestBody UpdateCampaignContext context) {
 
         campaignService.updateAndNotify(id, context);
-
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("{id}")
-    public void delete() {
-
+    public void delete(@PathVariable("id") long id) {
     }
 
 }

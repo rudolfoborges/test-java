@@ -3,6 +3,7 @@ package br.com.rudolfoborges.core.service;
 import br.com.rudolfoborges.core.Campaign;
 import br.com.rudolfoborges.core.context.CreateCampaignContext;
 import br.com.rudolfoborges.core.context.UpdateCampaignContext;
+import org.springframework.data.domain.Page;
 
 /**
  * @author rudolfoborges
@@ -13,5 +14,9 @@ public interface CampaignService {
     Campaign create(CreateCampaignContext context);
 
     void updateAndNotify(long id, UpdateCampaignContext context);
+
+    Page<Campaign> find(Long favouritoTeam);
+
+    Campaign findOne(long id);
 
 }

@@ -2,24 +2,25 @@ version: "3"
 
 services:
 
-  db1:
+  db_campaign:
     image: mysql
     ports:
       - 3307:3306
     environment:
-      - MYSQL_ROOT_PASSWORD="root"
-      - MYSQL_USER="testjava"
-      - MYSQL_PASSWORD="testjava"
-      - MYSQL_DATABASE="testdb"
-  db2:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=campaign
+      - MYSQL_PASSWORD=campaign
+      - MYSQL_DATABASE=campaigns
+
+  db_user:
     image: mysql
     ports:
       - 3308:3306
     environment:
       - MYSQL_ROOT_PASSWORD="root"
-      - MYSQL_USER=testjava
-      - MYSQL_PASSWORD=testjava
-      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - MYSQL_DATABASE=users
 
   rabbit:
     image: rabbitmq:3-management
