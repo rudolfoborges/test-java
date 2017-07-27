@@ -15,11 +15,6 @@ subprojects {
     apply plugin: 'eclipse'
     apply plugin: 'org.springframework.boot'
 
-    bootRun {
-        group = 'LOCAL'
-        systemProperties = ['spring.profiles.active': "local"]
-    }
-
     sourceCompatibility = 1.8
 
     repositories {
@@ -52,8 +47,7 @@ subprojects {
 project(':campaign-api') {
 
     bootRun {
-        group = 'LOCAL'
-        systemProperties = ['spring.profiles.active': "local"]
+        systemProperties = System.properties
     }
 
     dependencies {
