@@ -8,9 +8,9 @@ services:
       - 3307:3306
     environment:
       - MYSQL_ROOT_PASSWORD="root"
-      - MYSQL_USER=testjava
-      - MYSQL_PASSWORD=testjava
-      - MYSQL_DATABASE=testdb
+      - MYSQL_USER="testjava"
+      - MYSQL_PASSWORD="testjava"
+      - MYSQL_DATABASE="testdb"
   db2:
     image: mysql
     ports:
