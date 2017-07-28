@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.rudolfoborges.q3.CharacterStreamTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-07-28T09:04:52" hostname="Rudolfos-MBP" time="0.005">
-  <properties/>
-  <testcase name="hashNext" classname="br.com.rudolfoborges.q3.CharacterStreamTest" time="0.004"/>
-  <testcase name="getNext" classname="br.com.rudolfoborges.q3.CharacterStreamTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,15 +1,17 @@
 version: "3"
 
 services:
+
   campaign_api:
     build: ./campaign
     ports:
       - 8080:8080
+    networks:
+      - backend
     depends_on:
       - db_campaign
       - rabbit
-    networks:
-      - backend
+      - eureka
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
@@ -17,14 +19,22 @@ services:
     build: ./user
     ports:
       - 8081:8081
+    networks:
+      - backend
     depends_on:
       - db_user
       - rabbit
       - campaign_api
-    networks:
-      - backend
+      - eureka
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+
+  eureka:
+    build: ./eureka-server
+    ports:
+      - 8761:8761
+    networks:
+      - backend
 
   db_campaign:
     image: mysql
@@ -57,7 +67,6 @@ services:
     ports:
       - 15672:15672
       - 5672:5672
-
 
 networks:
   backend:
