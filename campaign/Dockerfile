@@ -2,7 +2,7 @@ FROM java:8-jdk-alpine
 
 WORKDIR /opt
 
-ADD build/libs/campaign-api.jar campaign-api.jar
+ADD campaign-api/build/libs/campaign-api.jar campaign-api.jar
 
 EXPOSE 8080
 

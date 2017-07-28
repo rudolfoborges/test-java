@@ -1,11 +1,24 @@
 version: "3"
 
 services:
+  campaign_api:
+    build: ./campaign
+    ports:
+      - 8080:8080
+    depends_on:
+      - db_campaign
+      - rabbit
+    networks:
+      - backend
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 
   db_campaign:
     image: mysql
     ports:
       - 3307:3306
+    networks:
+      - backend
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=campaign
@@ -24,6 +37,13 @@ services:
 
   rabbit:
     image: rabbitmq:3-management
+    networks:
+      - backend
     ports:
       - 15672:15672
       - 5672:5672
+
+
+networks:
+  backend:
+    driver: bridge

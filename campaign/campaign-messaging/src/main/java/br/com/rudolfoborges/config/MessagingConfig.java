@@ -26,6 +26,7 @@ import java.util.Map;
 @EnableRabbit
 @Configuration
 @PropertySource(ignoreResourceNotFound = false, value = "classpath:messaging-application.properties")
+@PropertySource(ignoreResourceNotFound = false, value = "classpath:messaging-application-${spring.profiles.active}.properties")
 public class MessagingConfig {
 
 	@Value("${rabbit.campaign.exchange}")
