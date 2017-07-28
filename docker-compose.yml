@@ -1,0 +1,73 @@
+version: "3"
+
+services:
+
+  campaign_api:
+    build: ./campaign
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+    depends_on:
+      - db_campaign
+      - rabbit
+      - eureka
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  user_api:
+    build: ./user
+    ports:
+      - 8081:8081
+    networks:
+      - backend
+    depends_on:
+      - db_user
+      - rabbit
+      - campaign_api
+      - eureka
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  eureka:
+    build: ./eureka-server
+    ports:
+      - 8761:8761
+    networks:
+      - backend
+
+  db_campaign:
+    image: mysql
+    ports:
+      - 3307:3306
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=campaign
+      - MYSQL_PASSWORD=campaign
+      - MYSQL_DATABASE=campaigns
+
+  db_user:
+    image: mysql
+    ports:
+      - 3308:3306
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD="root"
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - MYSQL_DATABASE=users
+
+  rabbit:
+    image: rabbitmq:3-management
+    networks:
+      - backend
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+networks:
+  backend:
+    driver: bridge
