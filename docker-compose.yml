@@ -13,6 +13,19 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
+  user_api:
+    build: ./user
+    ports:
+      - 8081:8081
+    depends_on:
+      - db_user
+      - rabbit
+      - campaign_api
+    networks:
+      - backend
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
   db_campaign:
     image: mysql
     ports:
@@ -29,6 +42,8 @@ services:
     image: mysql
     ports:
       - 3308:3306
+    networks:
+      - backend
     environment:
       - MYSQL_ROOT_PASSWORD="root"
       - MYSQL_USER=user
