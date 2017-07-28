@@ -34,8 +34,6 @@ public class CharUtilsTest {
 		final String text = "text";
 
 		char firstChar = CharUtils.firstChar(new CharacterStream(text));
-
-		Assert.assertEquals('e', firstChar);
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -43,8 +41,6 @@ public class CharUtilsTest {
 		final String text = "r";
 
 		char firstChar = CharUtils.firstChar(new CharacterStream(text));
-
-		Assert.assertEquals('e', firstChar);
 	}
 
 	@Test
@@ -61,8 +57,20 @@ public class CharUtilsTest {
 		final String text = "aba";
 
 		char firstChar = CharUtils.firstChar(new CharacterStream(text));
+	}
 
-		Assert.assertEquals('i', firstChar);
+	@Test(expected = RuntimeException.class)
+	public void onePairNoMatch2(){
+		final String text = "bba";
+
+		char firstChar = CharUtils.firstChar(new CharacterStream(text));
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void onePairNoMatch3(){
+		final String text = "bbb";
+
+		char firstChar = CharUtils.firstChar(new CharacterStream(text));
 	}
 
 }

@@ -26,6 +26,11 @@ public class CharUtils {
 
 			text.append(next);
 
+			if(countDownLatch.getCount() == 2
+					&& !isVowel(next)){
+				continue;
+			}
+
 			if (countDownLatch.getCount() == 0l
 					&& isConsonant(last)
 					&& isVowel(next)) {
