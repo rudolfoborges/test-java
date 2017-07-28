@@ -2,4 +2,6 @@ rootProject.name = 'user'
 
 include 'user-api',
         'user-core',
-        'user-persistence'
+        'user-persistence',
+        'user-messaging'
+
