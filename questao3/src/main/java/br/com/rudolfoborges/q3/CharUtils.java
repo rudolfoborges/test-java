@@ -22,7 +22,7 @@ public class CharUtils {
 		char last = Character.MAX_VALUE;
 
 		while (stream.hashNext()) {
-			final Character next = stream.getNext();
+			final char next = stream.getNext();
 
 			text.append(next);
 
