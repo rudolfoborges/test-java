@@ -24,7 +24,6 @@ import javax.validation.Valid;
 @Api(value = "API para gerenciamento de campanhas")
 @RestController
 @RequestMapping(value = "v1/campaigns",
-        consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE
 )
 public class CampaignController {

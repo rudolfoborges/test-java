@@ -20,7 +20,7 @@ public class SwaggerConfig {
     public Docket endpoints() {
         return new Docket(DocumentationType.SWAGGER_2)//
                 .select()//
-                .paths(PathSelectors.regex("(/campaigns|/campaigns/*)"))//
+                .paths(PathSelectors.regex("(/v1/campaigns|/v1/campaigns.*)"))//
                 .build()
                 .apiInfo(new ApiInfoBuilder().title("Campaign API")
                         .description("API para criação e gerenciamento de campanhas")

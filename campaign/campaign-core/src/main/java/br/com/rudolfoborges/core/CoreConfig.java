@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
+import br.com.rudolfoborges.config.MessagingConfig;
 import br.com.rudolfoborges.persistence.PersistenceConfig;
 
 /**
@@ -15,7 +16,7 @@ import br.com.rudolfoborges.persistence.PersistenceConfig;
 @Configuration
 @EnableCircuitBreaker
 @EnableHystrixDashboard
-@Import({PersistenceConfig.class})
+@Import({PersistenceConfig.class, MessagingConfig.class})
 @ComponentScan(basePackageClasses = {CoreConfig.class})
 @PropertySource(ignoreResourceNotFound = false, value = "classpath:core-application.properties")
 @PropertySource(ignoreResourceNotFound = true, value = "classpath:core-application-${spring.profiles.active}.properties")

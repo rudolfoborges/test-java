@@ -4,6 +4,9 @@ import br.com.rudolfoborges.core.Campaign;
 import br.com.rudolfoborges.core.context.CreateCampaignContext;
 import br.com.rudolfoborges.core.context.UpdateCampaignContext;
 import br.com.rudolfoborges.core.converter.CampaignEntityToCampaignConverter;
+import br.com.rudolfoborges.core.exception.CampaignNotFoundException;
+import br.com.rudolfoborges.messaging.CampaignNotifyMessage;
+import br.com.rudolfoborges.messaging.CampaignUpdateNotifySender;
 import br.com.rudolfoborges.persistence.CampaignEntity;
 import br.com.rudolfoborges.persistence.CampaignEntityBuilder;
 import br.com.rudolfoborges.persistence.repository.CampaignRepository;
@@ -28,6 +31,9 @@ public class CampaignServiceImpl implements CampaignService {
 
     @Autowired
     private CampaignRepository campaignRepository;
+
+    @Autowired
+    private CampaignUpdateNotifySender campaignUpdateNotifySender;
 
     @Override
     @Transactional
@@ -56,7 +62,7 @@ public class CampaignServiceImpl implements CampaignService {
     public void updateAndNotify(long id, UpdateCampaignContext context) {
 
         final CampaignEntity campaignEntity = campaignRepository.findOne(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(CampaignNotFoundException::new);
 
         if (context.getName() != null) {
             campaignEntity.setName(context.getName());
@@ -67,6 +73,9 @@ public class CampaignServiceImpl implements CampaignService {
         }
 
         campaignRepository.save(campaignEntity);
+
+        final CampaignNotifyMessage campaignNotifyMessage = new CampaignNotifyMessage(campaignEntity.getId());
+        campaignUpdateNotifySender.sendMessage(campaignNotifyMessage);
     }
 
     @Override
@@ -94,7 +103,7 @@ public class CampaignServiceImpl implements CampaignService {
     @Override
     public Campaign findOne(long id) {
         final CampaignEntity campaignEntity = campaignRepository.findOne(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(CampaignNotFoundException::new);
 
         return CampaignEntityToCampaignConverter.convertFrom(campaignEntity);
     }

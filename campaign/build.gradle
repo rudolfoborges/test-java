@@ -34,6 +34,9 @@ subprojects {
         compile('org.springframework.boot:spring-boot-starter-validation')
         compile('org.springframework.boot:spring-boot-starter-web')
         testCompile('org.springframework.boot:spring-boot-starter-test')
+        compile(group: 'org.jolokia', name: 'jolokia-core')
+
+        compile(group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth')
     }
 
     dependencyManagement {
@@ -50,6 +53,10 @@ project(':campaign-api') {
         systemProperties = System.properties
     }
 
+    jar{
+        archiveName = 'campaign-api.jar'
+    }
+
     dependencies {
         compile project(':campaign-core')
 
@@ -59,6 +66,8 @@ project(':campaign-api') {
 
         compile(group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1')
         compile(group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1')
+
+        compile(group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310')
     }
 
 }
@@ -71,6 +80,7 @@ project(':campaign-core') {
 
     dependencies {
         compile project(':campaign-persistence')
+        compile project(':campaign-messaging')
 
     }
 
@@ -97,7 +107,8 @@ project(':campaign-messaging') {
     }
 
     dependencies {
-
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-amqp')
+        compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
     }
 
 }
