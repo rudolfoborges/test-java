@@ -21,6 +21,7 @@ import br.com.rudolfoborges.user.CoreConfig;
 @ComponentScan({"br.com.rudolfoborges.user"})
 @Import({CoreConfig.class})
 @PropertySource(ignoreResourceNotFound = false, value = "classpath:api-application.properties")
+@PropertySource(ignoreResourceNotFound = true, value = "classpath:api-application-${spring.profiles.active}.properties")
 public class ApiConfig {
 
 	@Bean

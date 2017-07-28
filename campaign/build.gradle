@@ -68,6 +68,8 @@ project(':campaign-api') {
         compile(group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1')
 
         compile(group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310')
+
+        compile('org.springframework.cloud:spring-cloud-starter-eureka')
     }
 
 }

@@ -1,18 +1,14 @@
-package br.com.rudolfoborges.user;
+package br.com.rudolfoborges.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Import;
-
-import br.com.rudolfoborges.user.config.ApiConfig;
-import br.com.rudolfoborges.user.config.EurekaClientConfig;
-
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
- * Created by rudolfoborges on 26/07/17.
+ * Created by rudolfoborges on 28/07/17.
  */
 @SpringBootApplication
-@Import({ApiConfig.class})
+@EnableEurekaServer
 public class AppStarter {
 
 	public static void main(String[] args) {

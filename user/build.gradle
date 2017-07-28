@@ -36,6 +36,8 @@ subprojects {
         testCompile('org.springframework.boot:spring-boot-starter-test')
         compile(group: 'org.jolokia', name: 'jolokia-core')
 
+        compile('org.springframework.cloud:spring-cloud-starter-eureka')
+
         compile(group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth')
     }
 
